@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using E_Cinema.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,15 @@ namespace E_Cinema.Data
         {
 
         }
+
+       /* protected override void onModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Actor_Movie>().HasKey(am => new 
+            {
+                am.ActorId ,
+                am.MovieId 
+            });
+            base.OnModelCreating(modelBuilder);
+        }*/
     }
 }

@@ -14,5 +14,7 @@ namespace E_Cinema.Models
         public string ProfilPictureUrl { get; set; }
         public string FullName { get; set; }
         public string Bio { get; set; }
+
+        public List<Movies> Movies { get; set; }
     }
 }
