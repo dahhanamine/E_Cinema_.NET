@@ -12,6 +12,7 @@ namespace E_Cinema.Data
         Drama , 
         Documentary ,
         Romantique ,
-        Comedy 
+        Comedy ,
+        Cartoon
     }
 }
