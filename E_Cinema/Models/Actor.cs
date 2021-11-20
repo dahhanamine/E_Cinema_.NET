@@ -10,8 +10,12 @@ namespace E_Cinema.Models
     {
         [Key]
         public int Id { get; set; }
+
+        [Display(Name ="Profil")]
         public string  ProfilPictureUrl { get; set; }
+        [Display(Name = "FullName")]
         public string FullName { get; set; }
+        [Display(Name = "Biography")]
         public string Bio { get; set; }
 
         public List<Actor_Movie> Actor_Movies { get; set; }
