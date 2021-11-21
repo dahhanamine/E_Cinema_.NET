@@ -1,4 +1,5 @@
 using E_Cinema.Data;
+using E_Cinema.Data.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,6 +28,8 @@ namespace E_Cinema
         {
             services.AddDbContext<AppDbContext>(o =>o.UseSqlServer
             (Configuration.GetConnectionString("DefautltConnectionString")));
+
+            services.AddScoped<IActorsService, ActorsService>();
 
             services.AddControllersWithViews();
         }

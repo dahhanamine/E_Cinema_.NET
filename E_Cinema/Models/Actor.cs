@@ -12,10 +12,13 @@ namespace E_Cinema.Models
         public int Id { get; set; }
 
         [Display(Name ="Profil")]
+        [Required(ErrorMessage ="Profil is required")]
         public string  ProfilPictureUrl { get; set; }
         [Display(Name = "FullName")]
+        [Required(ErrorMessage = "FullName is required")]
         public string FullName { get; set; }
         [Display(Name = "Biography")]
+        [Required(ErrorMessage = "Biography is required")]
         public string Bio { get; set; }
 
         public List<Actor_Movie> Actor_Movies { get; set; }
