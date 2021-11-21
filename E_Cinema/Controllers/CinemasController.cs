@@ -1,5 +1,6 @@
 ﻿using E_Cinema.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,9 +19,10 @@ namespace E_Cinema.Controllers
         }
 
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var allCinemas = await _context.Cinemas.ToListAsync();
+            return View(allCinemas);
         }
     }
 }

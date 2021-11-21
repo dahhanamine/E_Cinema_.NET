@@ -19,11 +19,12 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                       <li class="navbar-nav flex-grow-1">
+                           <a class="nav-link text-dark" asp-controller="Movies" asp-action="Index" ><i class="badge-info bi-film"></i>Movies</a>
+                       </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="button" 
+                               aria-haspopup="true" aria-expanded="false"><i class="bi bi-gear"></i> Management </a>
                         </li>
                     </ul>
                 </div>
