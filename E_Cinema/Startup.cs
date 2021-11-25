@@ -30,6 +30,7 @@ namespace E_Cinema
             (Configuration.GetConnectionString("DefautltConnectionString")));
 
             services.AddScoped<IActorsService, ActorsService>();
+            services.AddScoped<IProducersService, ProducersService>();
 
             services.AddControllersWithViews();
         }

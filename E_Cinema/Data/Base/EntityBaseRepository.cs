@@ -20,6 +20,7 @@ namespace E_Cinema.Data.Base
         public async Task AddAsync(T entity)
         {
             await _context.Set<T>().AddAsync(entity);
+            await _context.SaveChangesAsync();
         }
 
         public async  Task DeleteAsync(int id)
@@ -27,6 +28,7 @@ namespace E_Cinema.Data.Base
             var entity = await _context.Set<T>().FirstOrDefaultAsync(a => a.Id == id);
             EntityEntry entityEntry = _context.Entry<T>(entity);
             entityEntry.State = EntityState.Deleted;
+            await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<T>> GetAllAsync()
@@ -43,8 +45,9 @@ namespace E_Cinema.Data.Base
 
         public async Task UpdateAsync(int id, T entity)
         {
-            EntityEntry entityEntry = _context.Entry<T>(entity);
-            entityEntry.State = EntityState.Modified;
+             EntityEntry entityEntry =   _context.Entry<T>(entity);
+             entityEntry.State =  EntityState.Modified;
+             await _context.SaveChangesAsync();
         }
     }
 }
