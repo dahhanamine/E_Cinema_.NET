@@ -52,6 +52,28 @@ namespace E_Cinema.Controllers
 
         }
 
+        public async Task<IActionResult> Edit(int id )
+        {
+            var ProDetails = await _service.GetByIdAsync(id);
+            if(ProDetails == null)return View("NotFound");
+            return View(ProDetails);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id , [Bind("ProfilPictureUrl,FullName,Bio")] Producer producer)
+        {
+            if (!ModelState.IsValid) return View(producer);
+            
+            if(id == producer.Id)
+            {
+                await _service.UpdateAsync(id, producer);
+                return RedirectToAction(nameof(Index));
+
+            }
+            return View(producer);
+
+        }
+
 
     }
 }
