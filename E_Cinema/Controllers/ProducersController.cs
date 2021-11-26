@@ -25,5 +25,14 @@ namespace E_Cinema.Controllers
             var allProducers = await _service.GetAllAsync();
             return View(allProducers);
         }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var ProducerDetails = await _service.GetByIdAsync(id);
+            if (ProducerDetails == null) return View("NotFound");
+             return View(ProducerDetails);
+        }
+
+
     }
 }
