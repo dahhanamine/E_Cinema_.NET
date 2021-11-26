@@ -1,5 +1,6 @@
 ﻿using E_Cinema.Data;
 using E_Cinema.Data.Services;
+using E_Cinema.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -31,6 +32,24 @@ namespace E_Cinema.Controllers
             var ProducerDetails = await _service.GetByIdAsync(id);
             if (ProducerDetails == null) return View("NotFound");
              return View(ProducerDetails);
+        }
+
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([Bind("ProfilPictureUrl,FullName,Bio")] Producer producer)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(producer);
+            }
+            await _service.AddAsync(producer);
+            return RedirectToAction(nameof(Index));
+
         }
 
 
