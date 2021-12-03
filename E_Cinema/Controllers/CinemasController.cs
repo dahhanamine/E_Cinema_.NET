@@ -1,4 +1,6 @@
 ﻿using E_Cinema.Data;
+using E_Cinema.Data.Services;
+using E_Cinema.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,18 +13,36 @@ namespace E_Cinema.Controllers
     public class CinemasController : Controller
     {
 
-        private readonly AppDbContext _context;
+        private readonly ICinemasService _service;
 
-        public CinemasController(AppDbContext context)
+        public CinemasController(ICinemasService service)
         {
-            _context = context;
+            _service = service;
         }
 
 
-        public async Task<IActionResult> Index()
+       public async Task<IActionResult> Index()
         {
-            var allCinemas = await _context.Cinemas.ToListAsync();
+            var allCinemas = await _service.GetAllAsync();
             return View(allCinemas);
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([Bind("Logo,Name,Description")] Cinema cinema)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(cinema);
+            }
+            await _service.AddAsync(cinema);
+            return RedirectToAction(nameof(Index));
+
+        }
+
     }
 }
