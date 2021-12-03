@@ -60,16 +60,34 @@ namespace E_Cinema.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id , [Bind("ProfilPictureUrl,FullName,Bio")] Producer producer)
+        public async Task<IActionResult> Edit(int id , [Bind("Id,ProfilPictureUrl,FullName,Bio")] Producer producer)
         {
             if (!ModelState.IsValid) return View(producer);
             
-            
+            if(id == producer.Id)
+            {
                 await _service.UpdateAsync(id, producer);
                 return RedirectToAction(nameof(Index));
+            }
 
-            
-            
+            return View(producer);
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var ProDetails = await _service.GetByIdAsync(id);
+            if (ProDetails == null) return View("NotFound");
+            return View(ProDetails);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirm(int id)
+        {
+
+            var ProDetails = await _service.GetByIdAsync(id);
+            if (ProDetails == null) return View("NotFound");
+            await _service.DeleteAsync(id);
+            return RedirectToAction(nameof(Index));
         }
 
 
