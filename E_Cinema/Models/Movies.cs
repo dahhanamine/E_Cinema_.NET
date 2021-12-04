@@ -1,4 +1,5 @@
 ﻿using E_Cinema.Data;
+using E_Cinema.Data.Base;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace E_Cinema.Models
 {
-    public class Movies
+    public class Movies : IEntityBase
     {
 
         [Key]
