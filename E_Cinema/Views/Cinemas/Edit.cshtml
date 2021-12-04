@@ -1,20 +1,20 @@
 ﻿@model Cinema
 
-@{ 
-    ViewData["Title"] = "Add a new cinema";
+@{
+    ViewData["Title"] = "Update Cinema";
 }
 
 <div class="row text">
     <div class="col-md-8 offset-2">
         <p>
-            <h1>Add a new cinema</h1>
+            <h1>Update Cinema</h1>
         </p>
         <div class="row">
             <div class="col-md-8 offset-2">
-                <form asp-action="Create">
+                <form asp-action="Edit">
                     <div asp-validation-summary="ModelOnly" class="text-danger"> </div>
                     <div class="form-group text-center">
-                        <img  class="border-info rounded-circle " style="max-width: 150px" id="logoPrev" />
+                        <img class="border-info rounded-circle " style="max-width: 150px" id="logo" />
                     </div>
                     <div class="form-group">
                         <label asp-for="Logo" class="control-label"></label>
@@ -32,31 +32,31 @@
                         <span class="text-danger" asp-validation-for="Description"></span>
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Create" class="btn btn-outline-success float-right " />
+                        <input type="submit" value="Update" class="btn btn-outline-success float-right " />
                         <a class="btn btn-outline-secondary" asp-action="Index">Show All</a>
                     </div>
                 </form>
-               
+
             </div>
-    </div>
         </div>
+    </div>
 </div>
 
 
 @section Scripts{
 
-<script>
+    <script>
 
     $(document).ready(function () {
-        var output = document.getElementById('logoPrev');
+        var output = document.getElementById("logo");
         output.src = $("#Logo").val();
     })
 
-    $("#Logo").on("change", function (){
+        $("#Logo").on("change", function (){
 
-        var output = document.getElementById('logoPrev');
+        var output = document.getElementById("logo");
         output.src = $(this).val();
     })
 
-</script>
+    </script>
 }
