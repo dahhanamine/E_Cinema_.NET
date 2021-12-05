@@ -9,6 +9,6 @@ namespace E_Cinema.Data.Services
 {
     public interface IMoviesService:IEntityBaseRepository<Movies>
     {
-
+        Task<Movies> GetMoviesByIdAsync(int id);
     }
 }

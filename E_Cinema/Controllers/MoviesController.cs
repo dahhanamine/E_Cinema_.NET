@@ -22,8 +22,16 @@ namespace E_Cinema.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var allMovies = await _service.GetAllAsync();
+            var allMovies = await _service.GetAllAsync(n=>n.Cinema);
             return View(allMovies);
         }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var movieDetails = await _service.GetMoviesByIdAsync(id);
+            return View(movieDetails);
+        }
+
+
     }
 }

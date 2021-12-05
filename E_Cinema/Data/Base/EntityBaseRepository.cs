@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace E_Cinema.Data.Base
@@ -35,6 +36,14 @@ namespace E_Cinema.Data.Base
         {
             var result = await _context.Set<T>().ToListAsync();
             return result;
+        }
+
+        public async Task<IEnumerable<T>> GetAllAsync(params Expression<Func<T, object>>[] expressions)
+        {
+
+            IQueryable<T> query = _context.Set<T>();
+            query = expressions.Aggregate(query, (current, expressions) => current.Include(expressions));
+            return await query.ToListAsync();
         }
 
         public async Task<T> GetByIdAsync(int id)
