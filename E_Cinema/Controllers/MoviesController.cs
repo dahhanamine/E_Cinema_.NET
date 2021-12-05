@@ -1,6 +1,7 @@
 ﻿using E_Cinema.Data;
 using E_Cinema.Data.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,18 @@ namespace E_Cinema.Controllers
         {
             var movieDetails = await _service.GetMoviesByIdAsync(id);
             return View(movieDetails);
+        }
+
+        public async Task<IActionResult> Create()
+        {
+            var movieDropDown = await _service.GetDropDownValues();
+
+            ViewBag.CinemaID = new SelectList(movieDropDown.Cinemas, "Id", "Name");
+
+            ViewBag.ProducerID = new SelectList(movieDropDown.Producers, "Id", "FullName");
+
+            ViewBag.ActorID = new SelectList(movieDropDown.Actors, "Id", "FullName");
+            return View();
         }
 
 
