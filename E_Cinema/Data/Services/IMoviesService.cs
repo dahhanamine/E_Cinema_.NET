@@ -12,5 +12,7 @@ namespace E_Cinema.Data.Services
     {
         Task<Movies> GetMoviesByIdAsync(int id);
         Task<NewMoviesDropDownVM> GetDropDownValues();
+
+        Task AddNewMovie(NewMoviesVm data);
     }
 }

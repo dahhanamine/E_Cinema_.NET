@@ -1,5 +1,6 @@
 ﻿using E_Cinema.Data;
 using E_Cinema.Data.Services;
+using E_Cinema.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -44,7 +45,24 @@ namespace E_Cinema.Controllers
             ViewBag.ActorID = new SelectList(movieDropDown.Actors, "Id", "FullName");
             return View();
         }
+        [HttpPost]
+        public async Task<IActionResult> Create(NewMoviesVm newMovieVm) 
+        {
 
+            if (!ModelState.IsValid)
+            {
+                var movieDropDown = await _service.GetDropDownValues();
+
+                ViewBag.CinemaID = new SelectList(movieDropDown.Cinemas, "Id", "Name");
+
+                ViewBag.ProducerID = new SelectList(movieDropDown.Producers, "Id", "FullName");
+
+                ViewBag.ActorID = new SelectList(movieDropDown.Actors, "Id", "FullName");
+                return View(newMovieVm);
+            }
+            await _service.AddNewMovie(newMovieVm);
+            return RedirectToAction(nameof(Index));
+        }
 
     }
 }

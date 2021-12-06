@@ -17,6 +17,38 @@ namespace E_Cinema.Data.Services
             _context = context;
         }
 
+        public async Task AddNewMovie(NewMoviesVm data)
+        {
+            var newMovie = new Movies()
+            {
+                Name = data.Name,
+                Description = data.Description,
+                Price = data.Price ,
+                ImageUrl = data.ImageUrl ,
+                CinemaId = data.CinemaId ,
+                StartDate = data.StartDate ,
+                EndDate = data.EndDate ,
+                MovieCategory = data.MovieCategory ,
+                ProducerId = data.ProducerId 
+
+            };
+
+            await   _context.Movies.AddAsync(newMovie);
+            await _context.SaveChangesAsync();
+
+
+            foreach(var actorId  in data.ActorIDs)
+            {
+                var newActorMovie = new Actor_Movie()
+                {
+                    MovieId = newMovie.Id,
+                    ActorId = actorId
+                };
+                await _context.Actor_Movies.AddAsync(newActorMovie);
+            }
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<NewMoviesDropDownVM> GetDropDownValues()
         {
             var response = new NewMoviesDropDownVM();
