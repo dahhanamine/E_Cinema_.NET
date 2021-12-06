@@ -15,9 +15,9 @@
                         <div class="card-header text-white bg-info">
                             <p class="card-text">
                                 <h5 class="card-title">
-                                        @item.Name
-                                        <a class="text-white float-right"><i class="bi bi-pencil-square"></i></a>
-                                    
+                                    @item.Name
+                                    <a class="text-white float-right"><i class="bi bi-pencil-square"></i></a>
+
                                 </h5>
                             </p>
                         </div>
@@ -67,3 +67,4 @@
         </div>
     }
 </div>
+@await Html.PartialAsync("_CreateItem", "Movies")
