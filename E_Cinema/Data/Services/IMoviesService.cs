@@ -14,5 +14,6 @@ namespace E_Cinema.Data.Services
         Task<NewMoviesDropDownVM> GetDropDownValues();
 
         Task AddNewMovie(NewMoviesVm data);
+        Task UpdateMovie(NewMoviesVm data); 
     }
 }

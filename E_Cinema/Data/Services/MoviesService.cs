@@ -71,5 +71,43 @@ namespace E_Cinema.Data.Services
             return movieDetails;
        
         }
+
+        public async Task UpdateMovie(NewMoviesVm data)
+        {
+
+            var dbmovie = await _context.Movies.FirstOrDefaultAsync(n => n.Id == data.Id);
+            if (dbmovie != null)
+            {
+
+                dbmovie.Name = data.Name;
+                dbmovie.Description = data.Description;
+                dbmovie.Price = data.Price;
+                dbmovie.ImageUrl = data.ImageUrl;
+                dbmovie.CinemaId = data.CinemaId;
+                dbmovie.StartDate = data.StartDate;
+                dbmovie.EndDate = data.EndDate;
+                dbmovie.MovieCategory = data.MovieCategory;
+                dbmovie.ProducerId = data.ProducerId;
+
+        
+                await _context.SaveChangesAsync();
+
+            }
+
+            var existActor = _context.Actor_Movies.Where(n => n.ActorId == data.Id).ToList();
+            _context.Actor_Movies.RemoveRange(existActor);
+            await _context.SaveChangesAsync();
+
+            foreach (var actorId in data.ActorIDs)
+            {
+                var newActorMovie = new Actor_Movie()
+                {
+                    MovieId = data.Id,
+                    ActorId = actorId
+                };
+                await _context.Actor_Movies.AddAsync(newActorMovie);
+            }
+            await _context.SaveChangesAsync();
+        }
     }
 }
